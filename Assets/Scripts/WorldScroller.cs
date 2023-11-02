@@ -5,6 +5,7 @@ using UnityEngine;
 public class WorldScroller : MonoBehaviour
 { 
     public WorldSegment groundLeft, groundRight;
+    public WorldSegment[] prefabSegments;
 
     private void Update()
     {
@@ -15,12 +16,16 @@ public class WorldScroller : MonoBehaviour
 
         if(groundRight.transform.position.x <= 0)
         {
-            d.x = groundRight.SizeX + groundLeft.SizeX;
-            groundLeft.transform.Translate(d);
+            Destroy(groundLeft.gameObject);
 
-            var tmp = groundLeft;
+            int randInd = Random.Range(0, prefabSegments.Length);
+            WorldSegment newSeg = Instantiate(prefabSegments[randInd], transform);
+
+            d.x = groundRight.SizeX * 0.5f + newSeg.SizeX * 0.5f;
+            newSeg.transform.position = groundRight.transform.position + d;
+
             groundLeft = groundRight;
-            groundRight = tmp;
+            groundRight = newSeg;
         }
     }
 }
