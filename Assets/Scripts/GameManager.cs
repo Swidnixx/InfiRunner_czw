@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
     public float worldSpeed = 1;
     public Text scoreText;
     public GameObject gameOverPanel;
-    float score;
+    float score; 
+    int coins;
 
     private void Update()
     {
@@ -41,5 +42,10 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene( SceneManager.GetActiveScene().name );
+    }
+
+    public void CoinCollected()
+    {
+        coins++;
     }
 }

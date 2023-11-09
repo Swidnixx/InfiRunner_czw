@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         //Detecting Ground
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundMask);
+        RaycastHit2D hit = Physics2D.BoxCast( boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundMask);
         grounded = hit.collider != null;
 
         //Jumping
@@ -62,6 +62,6 @@ public class PlayerController : MonoBehaviour
         //Raycast debug
         Color c = grounded ? Color.green : Color.red;
         Gizmos.color = c;
-        Gizmos.DrawWireCube(transform.position + Vector3.down * 0.1f, boxCollider.bounds.size);
+        Gizmos.DrawWireCube( boxCollider.bounds.center + Vector3.down * 0.1f, boxCollider.bounds.size);
     }
 }
