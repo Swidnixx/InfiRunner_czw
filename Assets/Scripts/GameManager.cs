@@ -18,9 +18,16 @@ public class GameManager : MonoBehaviour
 
     public float worldSpeed = 1;
     public Text scoreText;
+    public Text coinText;
     public GameObject gameOverPanel;
     float score; 
     int coins;
+
+    private void Start()
+    {
+        coins = PlayerPrefs.GetInt("Coins");
+        coinText.text = coins.ToString();
+    }
 
     private void Update()
     {
@@ -47,5 +54,24 @@ public class GameManager : MonoBehaviour
     public void CoinCollected()
     {
         coins++;
+        coinText.text = coins.ToString();
+        PlayerPrefs.SetInt("Coins", coins);
+    }
+
+    bool magnetActive;
+    float magnetTime = 10;
+    float magnetDistance = 5;
+    public void MagnetCollected()
+    {
+        if(magnetActive)
+        {
+            CancelInvoke(nameof(CancelMagnet)); // if magnet is already active, cancel disabling not to disable current one too early
+        }
+        magnetActive = true;
+        Invoke(nameof(CancelMagnet), magnetTime);
+    }
+    private void CancelMagnet()
+    {
+        magnetActive = false;
     }
 }
