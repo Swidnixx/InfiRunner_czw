@@ -58,20 +58,35 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Coins", coins);
     }
 
-    bool magnetActive;
-    float magnetTime = 10;
-    float magnetDistance = 5;
+    public MagnetSO magnet;
+    public bool MagnetActive { get => magnet.IsActive; set => magnet.IsActive = value; }
     public void MagnetCollected()
     {
-        if(magnetActive)
+        if(MagnetActive)
         {
             CancelInvoke(nameof(CancelMagnet)); // if magnet is already active, cancel disabling not to disable current one too early
         }
-        magnetActive = true;
-        Invoke(nameof(CancelMagnet), magnetTime);
+        MagnetActive = true;
+        Invoke(nameof(CancelMagnet), magnet.Duration);
     }
     private void CancelMagnet()
     {
-        magnetActive = false;
+        MagnetActive = false;
+    }
+
+    public ImmortalitySO immortality;
+    public bool ImmortalityActive { get => immortality.IsActive; set => immortality.IsActive = value; } 
+    public void ImmortalityCollected()
+    {
+        if(ImmortalityActive)
+        {
+            CancelInvoke(nameof(CancelImmortality));
+        }
+        ImmortalityActive = true;
+        Invoke(nameof(CancelImmortality), immortality.Duration);
+    }
+    private void CancelImmortality()
+    {
+        ImmortalityActive = false;
     }
 }
