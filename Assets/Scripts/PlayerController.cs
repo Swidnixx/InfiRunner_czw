@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         //Detecting Ground
         RaycastHit2D hit = Physics2D.BoxCast( boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundMask);
-        grounded = hit.collider != null;
+        grounded = hit.collider != null && rb.velocity.y <= 0;
 
         //Jumping
         if(Input.GetMouseButtonDown(0))

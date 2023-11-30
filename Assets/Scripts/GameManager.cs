@@ -23,8 +23,17 @@ public class GameManager : MonoBehaviour
     float score; 
     int coins;
 
+    //Powerups
+    public MagnetSO magnet;
+    public ImmortalitySO immortality;
+    public bool MagnetActive { get => magnet.IsActive; set => magnet.IsActive = value; }
+    public bool ImmortalityActive { get => immortality.IsActive; set => immortality.IsActive = value; }
+
     private void Start()
     {
+        immortality.IsActive = false;
+        magnet.IsActive = false;
+
         coins = PlayerPrefs.GetInt("Coins");
         coinText.text = coins.ToString();
     }
@@ -41,6 +50,8 @@ public class GameManager : MonoBehaviour
 
     internal void GameOver()
     {
+        if (immortality.IsActive) return;
+
         Time.timeScale = 0;
         gameOverPanel.SetActive(true); //do w³¹czania/wy³¹czania gameObjectó
     }
@@ -58,8 +69,6 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Coins", coins);
     }
 
-    public MagnetSO magnet;
-    public bool MagnetActive { get => magnet.IsActive; set => magnet.IsActive = value; }
     public void MagnetCollected()
     {
         if(MagnetActive)
@@ -74,19 +83,20 @@ public class GameManager : MonoBehaviour
         MagnetActive = false;
     }
 
-    public ImmortalitySO immortality;
-    public bool ImmortalityActive { get => immortality.IsActive; set => immortality.IsActive = value; } 
     public void ImmortalityCollected()
     {
         if(ImmortalityActive)
         {
+            CancelImmortality();
             CancelInvoke(nameof(CancelImmortality));
         }
         ImmortalityActive = true;
+        worldSpeed += immortality.SpeedBoost;
         Invoke(nameof(CancelImmortality), immortality.Duration);
     }
     private void CancelImmortality()
     {
+        worldSpeed -= immortality.SpeedBoost;
         ImmortalityActive = false;
     }
 }
