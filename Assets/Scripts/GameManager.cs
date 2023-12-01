@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public ImmortalitySO immortality;
     public bool MagnetActive { get => magnet.IsActive; set => magnet.IsActive = value; }
     public bool ImmortalityActive { get => immortality.IsActive; set => immortality.IsActive = value; }
+   
+    public PowerupPanelUI powerupsUI;
 
     private void Start()
     {
@@ -45,7 +47,8 @@ public class GameManager : MonoBehaviour
         {
             NumberGroupSeparator = " "
         };
-        scoreText.text = score.ToString("N0", nfi);
+        //scoreText.text = score.ToString("N0", nfi);
+        scoreText.text = ((int)score).ToString();
     }
 
     internal void GameOver()
@@ -77,6 +80,7 @@ public class GameManager : MonoBehaviour
         }
         MagnetActive = true;
         Invoke(nameof(CancelMagnet), magnet.Duration);
+        powerupsUI.ActivateMagnet(magnet.Duration);
     }
     private void CancelMagnet()
     {
@@ -93,6 +97,7 @@ public class GameManager : MonoBehaviour
         ImmortalityActive = true;
         worldSpeed += immortality.SpeedBoost;
         Invoke(nameof(CancelImmortality), immortality.Duration);
+        powerupsUI.ActivateBattery(immortality.Duration);
     }
     private void CancelImmortality()
     {
