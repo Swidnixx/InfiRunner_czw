@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class Celownik : MonoBehaviour
 {
-    Animator animator;
+    public Animation eyeOpen;
+  //  public Animator animatorOka;
+    Animator animatorPowiek;
     Transform kiddo;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();    
+        animatorPowiek = GetComponent<Animator>();    
         kiddo = transform.GetChild(0);
 
         StartCoroutine(Move());
+    }
+
+    public void OpenEye(bool isOpen)
+    {
+        eyeOpen.Play();
+        //animatorOka.SetBool("open", isOpen);
     }
 
     IEnumerator Move()
     {
         while(true)
         {
-            animator.SetTrigger("move");
+            animatorPowiek.SetTrigger("move");
             yield return new WaitForSeconds(Random.value * 3);
         }
     }
