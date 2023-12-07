@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class MagnetBehaviour : MonoBehaviour
 {
+    public ParticleSystem effect;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             Destroy(gameObject);
             GameManager.Instance.MagnetCollected();
+            Instantiate(effect, transform.position, Quaternion.identity);
         }
     }
 }

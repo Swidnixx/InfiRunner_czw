@@ -18,14 +18,10 @@ public class GameManager : MonoBehaviour
 
     public float worldSpeed = 1;
     public Text scoreText;
-    public Image scorePanel;
-    public Image highScoreFill;
-    public Material burnUImaterial;
-    public Material burnUImaterialFill;
     public Text coinText;
     public GameObject gameOverPanel;
-    float score;
-    float highScore;
+    public float score { get; private set; }
+    public float highScore { get; private set; }
     int coins;
 
     //Powerups
@@ -50,12 +46,11 @@ public class GameManager : MonoBehaviour
         coinText.text = coins.ToString();
 
         highScore = PlayerPrefs.GetFloat("HighScore");
-        highScoreFill.fillAmount = score / highScore;
 
-        scorePanel.material = null;
-        highScoreFill.material = null;
     }
 
+    bool highScoreReached;
+    public Action OnHighScoreReached;
     private void Update()
     {
         score += worldSpeed * Time.deltaTime;
@@ -65,11 +60,13 @@ public class GameManager : MonoBehaviour
         {
             highScore = score;
             PlayerPrefs.SetFloat("HighScore", highScore);
-            highScoreFill.material = burnUImaterialFill;
-            scorePanel.material = burnUImaterial;
-            scorePanel.color = Color.white;
+
+            if(!highScoreReached)
+            {
+                highScoreReached = true;
+                OnHighScoreReached?.Invoke();
+            }
         }
-        highScoreFill.fillAmount = score / highScore;
     }
 
     internal void GameOver()

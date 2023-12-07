@@ -508,6 +508,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2921911793954498933, guid: 65ba1ed5f561ad54a922a4b0387f5595, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8180264973339271363, guid: 65ba1ed5f561ad54a922a4b0387f5595, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -1120,10 +1124,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Immortality (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 8180264973339271373, guid: 65ba1ed5f561ad54a922a4b0387f5595, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65ba1ed5f561ad54a922a4b0387f5595, type: 3}
 --- !u!1 &383699655
@@ -1625,17 +1625,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 346044274477700879, guid: a16294d8c46eff143bf2e9a74c029522, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3516099080008817957, guid: a16294d8c46eff143bf2e9a74c029522, type: 3}
       propertyPath: m_Name
       value: Magnet
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516099080008817957, guid: a16294d8c46eff143bf2e9a74c029522, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3516099080008817958, guid: a16294d8c46eff143bf2e9a74c029522, type: 3}
       propertyPath: m_RootOrder
@@ -1680,26 +1672,6 @@ PrefabInstance:
     - target: {fileID: 3516099080008817958, guid: a16294d8c46eff143bf2e9a74c029522, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516099080008817959, guid: a16294d8c46eff143bf2e9a74c029522, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6504315890221645750, guid: a16294d8c46eff143bf2e9a74c029522, type: 3}
-      propertyPath: m_Color.g
-      value: 0.26737964
-      objectReference: {fileID: 0}
-    - target: {fileID: 6504315890221645750, guid: a16294d8c46eff143bf2e9a74c029522, type: 3}
-      propertyPath: m_Color.r
-      value: 0.76470584
-      objectReference: {fileID: 0}
-    - target: {fileID: 6504315890221645750, guid: a16294d8c46eff143bf2e9a74c029522, type: 3}
-      propertyPath: m_Intensity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551084128866448394, guid: a16294d8c46eff143bf2e9a74c029522, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a16294d8c46eff143bf2e9a74c029522, type: 3}
@@ -3054,6 +3026,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fire: {fileID: 1751033957}
   dirtOverlay: {fileID: 8852251889911568399}
+  scorePanel: {fileID: 1868898414}
+  highScoreFill: {fileID: 1846545737}
+  burnUImaterial: {fileID: 2100000, guid: c58f998fd94118a4f841857201211344, type: 2}
+  burnUImaterialFill: {fileID: 2100000, guid: e924666f6ca5257498c5196983f2ebd0, type: 2}
 --- !u!1 &1674746241
 GameObject:
   m_ObjectHideFlags: 0
@@ -3260,10 +3236,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldSpeed: 5
   scoreText: {fileID: 1245360012}
-  scorePanel: {fileID: 1868898414}
-  highScoreFill: {fileID: 1846545737}
-  burnUImaterial: {fileID: 2100000, guid: c58f998fd94118a4f841857201211344, type: 2}
-  burnUImaterialFill: {fileID: 2100000, guid: e924666f6ca5257498c5196983f2ebd0, type: 2}
   coinText: {fileID: 1399533707}
   gameOverPanel: {fileID: 333982641}
   powerupManager: {fileID: 11400000, guid: c6839ea36c7190b4bbe3791ff8c39a31, type: 2}

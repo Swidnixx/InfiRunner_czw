@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    public ParticleSystem effect;
+
     public float atractionSpeed = 5;
     public float floatingSpeed = 1;
     public float floatDistance = 0.5f;
@@ -27,6 +29,7 @@ public class Coin : MonoBehaviour
         {
             Destroy(gameObject);
             GameManager.Instance.CoinCollected();
+            Instantiate(effect, transform.position, Quaternion.identity);
         }
     }
 
