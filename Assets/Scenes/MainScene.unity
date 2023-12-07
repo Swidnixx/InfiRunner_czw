@@ -1076,6 +1076,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 694028510}
     m_Modifications:
+    - target: {fileID: 2921911793954498933, guid: 65ba1ed5f561ad54a922a4b0387f5595, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8180264973339271363, guid: 65ba1ed5f561ad54a922a4b0387f5595, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1123,6 +1127,10 @@ PrefabInstance:
     - target: {fileID: 8180264973339271373, guid: 65ba1ed5f561ad54a922a4b0387f5595, type: 3}
       propertyPath: m_Name
       value: Immortality (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180264973339271373, guid: 65ba1ed5f561ad54a922a4b0387f5595, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65ba1ed5f561ad54a922a4b0387f5595, type: 3}
@@ -1274,6 +1282,9 @@ MonoBehaviour:
   - {fileID: 527504651873914380, guid: 3677000f133702643bdb0453bef80ee3, type: 3}
   - {fileID: 527504651873914380, guid: b3bebdb75bbd0ee4e9579de775759362, type: 3}
   - {fileID: 527504651873914380, guid: ea93efc1effa0f547bbc9c7253be23c2, type: 3}
+  - {fileID: 527504651873914380, guid: 55150c909a8d2c74ab2e6eb9e18b6995, type: 3}
+  - {fileID: 527504651873914380, guid: f2337c5857dca004084e32e2bd3ef042, type: 3}
+  - {fileID: 527504651873914380, guid: 0ce19dedac9a4bd4d9308b167d76c1e3, type: 3}
 --- !u!1 &453854673
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,7 +1543,7 @@ MonoBehaviour:
   groundLeft: {fileID: 1017152527}
   groundRight: {fileID: 1926103102}
   prefabSegments:
-  - {fileID: 527504651873914380, guid: 0ce19dedac9a4bd4d9308b167d76c1e3, type: 3}
+  - {fileID: 527504651873914380, guid: 1816014009c864f44999334f87b59918, type: 3}
 --- !u!4 &661430936
 Transform:
   m_ObjectHideFlags: 0

@@ -109,15 +109,16 @@ public class GameManager : MonoBehaviour
     {
         if(ImmortalityActive)
         {
-            CancelImmortality();
+           // CancelImmortality();
             CancelInvoke(nameof(CancelImmortality));
         }
         else
         {
+            worldSpeed += immortality.SpeedBoost;
             effectsController.BatteryEnable(true);
         }
+
         ImmortalityActive = true;
-        worldSpeed += immortality.SpeedBoost;
         Invoke(nameof(CancelImmortality), immortality.Duration);
         powerupsUI.ActivateBattery(immortality.Duration);
     }
