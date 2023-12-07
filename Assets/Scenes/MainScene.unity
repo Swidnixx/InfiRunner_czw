@@ -3266,8 +3266,7 @@ MonoBehaviour:
   burnUImaterialFill: {fileID: 2100000, guid: e924666f6ca5257498c5196983f2ebd0, type: 2}
   coinText: {fileID: 1399533707}
   gameOverPanel: {fileID: 333982641}
-  magnet: {fileID: 11400000, guid: 479b1554864369645a4bcbdc8cba7239, type: 2}
-  immortality: {fileID: 11400000, guid: cd8cf2022dbfcf1419d8624adc212ad7, type: 2}
+  powerupManager: {fileID: 11400000, guid: c6839ea36c7190b4bbe3791ff8c39a31, type: 2}
   powerupsUI: {fileID: 977028559}
   effectsController: {fileID: 1660310363}
 --- !u!4 &1772266260

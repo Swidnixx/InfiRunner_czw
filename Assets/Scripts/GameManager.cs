@@ -29,8 +29,9 @@ public class GameManager : MonoBehaviour
     int coins;
 
     //Powerups
-    public MagnetSO magnet;
-    public ImmortalitySO immortality;
+    public PowerupManager powerupManager;
+    public MagnetSO magnet => powerupManager.Magnet;
+    public ImmortalitySO immortality => powerupManager.Immortality;
     public bool MagnetActive { get => magnet.IsActive; set => magnet.IsActive = value; }
     public bool ImmortalityActive { get => immortality.IsActive; set => immortality.IsActive = value; }
    
