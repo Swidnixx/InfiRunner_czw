@@ -33,7 +33,7 @@ public class Coin : MonoBehaviour
     void MagnetAtracting()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        bool inRange = distanceToPlayer < GameManager.Instance.magnet.MagnetDistance;
+        bool inRange = distanceToPlayer < GameManager.Instance.Magnet.MagnetDistance;
         if (GameManager.Instance.MagnetActive && inRange)
         {
             Vector2 nextPos = Vector2.MoveTowards(

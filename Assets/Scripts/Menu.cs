@@ -5,9 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    public GameObject menuPanel, shopPanel;
+
     public void Play()
     {
         SceneManager.LoadScene("MainScene");
+    }
+
+    public void GoToShop()
+    {
+        menuPanel.SetActive(false);
+        shopPanel.SetActive(true);
+    }
+
+    public void BackToMenu()
+    {
+        menuPanel.SetActive(true);
+        shopPanel.SetActive(false);
     }
 
     public void Exit()

@@ -707,7 +707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &383913655
 Transform:
   m_ObjectHideFlags: 0
@@ -843,7 +843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &661430935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1714,8 +1714,7 @@ MonoBehaviour:
   scoreText: {fileID: 1245360012}
   coinText: {fileID: 1399533707}
   gameOverPanel: {fileID: 333982641}
-  magnet: {fileID: 11400000, guid: 479b1554864369645a4bcbdc8cba7239, type: 2}
-  immortality: {fileID: 11400000, guid: cd8cf2022dbfcf1419d8624adc212ad7, type: 2}
+  powerupManager: {fileID: 11400000, guid: c6839ea36c7190b4bbe3791ff8c39a31, type: 2}
 --- !u!4 &1772266260
 Transform:
   m_ObjectHideFlags: 0

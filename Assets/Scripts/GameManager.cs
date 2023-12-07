@@ -24,15 +24,16 @@ public class GameManager : MonoBehaviour
     int coins;
 
     //Powerups
-    public MagnetSO magnet;
-    public ImmortalitySO immortality;
-    public bool MagnetActive { get => magnet.IsActive; set => magnet.IsActive = value; }
-    public bool ImmortalityActive { get => immortality.IsActive; set => immortality.IsActive = value; }
+    [SerializeField] private PowerupManager powerupManager;
+    public MagnetSO Magnet => powerupManager.Magnet;
+    public ImmortalitySO Immortality => powerupManager.Immortality;
+    public bool MagnetActive { get => Magnet.IsActive; set => Magnet.IsActive = value; }
+    public bool ImmortalityActive { get => Immortality.IsActive; set => Immortality.IsActive = value; }
 
     private void Start()
     {
-        immortality.IsActive = false;
-        magnet.IsActive = false;
+        Immortality.IsActive = false;
+        Magnet.IsActive = false;
 
         coins = PlayerPrefs.GetInt("Coins");
         coinText.text = coins.ToString();
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     internal void GameOver()
     {
-        if (immortality.IsActive) return;
+        if (Immortality.IsActive) return;
 
         Time.timeScale = 0;
         gameOverPanel.SetActive(true); //do w³¹czania/wy³¹czania gameObjectó
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour
             CancelInvoke(nameof(CancelMagnet)); // if magnet is already active, cancel disabling not to disable current one too early
         }
         MagnetActive = true;
-        Invoke(nameof(CancelMagnet), magnet.Duration);
+        Invoke(nameof(CancelMagnet), Magnet.Duration);
     }
     private void CancelMagnet()
     {
@@ -91,12 +92,12 @@ public class GameManager : MonoBehaviour
             CancelInvoke(nameof(CancelImmortality));
         }
         ImmortalityActive = true;
-        worldSpeed += immortality.SpeedBoost;
-        Invoke(nameof(CancelImmortality), immortality.Duration);
+        worldSpeed += Immortality.SpeedBoost;
+        Invoke(nameof(CancelImmortality), Immortality.Duration);
     }
     private void CancelImmortality()
     {
-        worldSpeed -= immortality.SpeedBoost;
+        worldSpeed -= Immortality.SpeedBoost;
         ImmortalityActive = false;
     }
 }

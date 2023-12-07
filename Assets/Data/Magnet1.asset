@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23804f36ab5e58d4d94413ab83fc171c, type: 3}
   m_Name: Magnet1
   m_EditorClassIdentifier: 
-  magnetTime: 5
+  duration: 10
+  level: 1
+  upgraded: {fileID: 11400000, guid: f190ac416f150d44bbe5e5306e22f5c2, type: 2}
+  upgradeCost: 100
   magnetDistance: 4

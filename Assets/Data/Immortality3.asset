@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d02dfa5b06cac4b977d5e2289cedbe, type: 3}
   m_Name: Immortality3
   m_EditorClassIdentifier: 
-  duration: 8
+  duration: 20
+  level: 3
+  upgraded: {fileID: 0}
+  upgradeCost: 50000
+  speedBoost: 10
