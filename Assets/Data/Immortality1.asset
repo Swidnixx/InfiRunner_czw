@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d02dfa5b06cac4b977d5e2289cedbe, type: 3}
   m_Name: Immortality1
   m_EditorClassIdentifier: 
-  duration: 10
+  duration: 3
   speedBoost: 5

@@ -18,9 +18,14 @@ public class GameManager : MonoBehaviour
 
     public float worldSpeed = 1;
     public Text scoreText;
+    public Image scorePanel;
+    public Image highScoreFill;
+    public Material burnUImaterial;
+    public Material burnUImaterialFill;
     public Text coinText;
     public GameObject gameOverPanel;
-    float score; 
+    float score;
+    float highScore;
     int coins;
 
     //Powerups
@@ -31,24 +36,39 @@ public class GameManager : MonoBehaviour
    
     public PowerupPanelUI powerupsUI;
 
+    public EffectsController effectsController;
+
     private void Start()
     {
+        //PlayerPrefs.DeleteKey("HighScore");
+
         immortality.IsActive = false;
         magnet.IsActive = false;
 
         coins = PlayerPrefs.GetInt("Coins");
         coinText.text = coins.ToString();
+
+        highScore = PlayerPrefs.GetFloat("HighScore");
+        highScoreFill.fillAmount = score / highScore;
+
+        scorePanel.material = null;
+        highScoreFill.material = null;
     }
 
     private void Update()
     {
         score += worldSpeed * Time.deltaTime;
-        var nfi = new NumberFormatInfo()
-        {
-            NumberGroupSeparator = " "
-        };
-        //scoreText.text = score.ToString("N0", nfi);
         scoreText.text = ((int)score).ToString();
+
+        if(score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetFloat("HighScore", highScore);
+            highScoreFill.material = burnUImaterialFill;
+            scorePanel.material = burnUImaterial;
+            scorePanel.color = Color.white;
+        }
+        highScoreFill.fillAmount = score / highScore;
     }
 
     internal void GameOver()
@@ -94,6 +114,10 @@ public class GameManager : MonoBehaviour
             CancelImmortality();
             CancelInvoke(nameof(CancelImmortality));
         }
+        else
+        {
+            effectsController.BatteryEnable(true);
+        }
         ImmortalityActive = true;
         worldSpeed += immortality.SpeedBoost;
         Invoke(nameof(CancelImmortality), immortality.Duration);
@@ -103,5 +127,6 @@ public class GameManager : MonoBehaviour
     {
         worldSpeed -= immortality.SpeedBoost;
         ImmortalityActive = false;
+        effectsController.BatteryEnable(false);
     }
 }
