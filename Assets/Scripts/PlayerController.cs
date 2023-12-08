@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public LayerMask groundMask; 
-    public float jumpForce = 2;
+    public float jumpHeight = 1.5f;
+    public float jumpPeakDuration = 1.1f;
     public float pushForce = 200;
     Rigidbody2D rb;
     BoxCollider2D boxCollider;
@@ -14,9 +15,11 @@ public class PlayerController : MonoBehaviour
     bool jumpHeld; // Used to know if player holds jump button
 
     public GameObject tomoes;
+    float JumpInitialVelocity => (2 * jumpHeight) /  jumpPeakDuration;
 
     private void Start()
     {
+        DefineGravity();
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
     }
@@ -33,18 +36,22 @@ public class PlayerController : MonoBehaviour
             if(grounded)
             {
                 doubleJumped = false;
-                Vector2 velocity = new Vector2(0, jumpForce);
-                rb.velocity = velocity;
+                Jump();
             }
             else if (!doubleJumped && !paralyzed)
             {
                 doubleJumped = true;
-                Vector2 velocity = new Vector2(0, jumpForce);
-                rb.velocity = velocity;
+                Jump();
             }
         }
 
         jumpHeld = Input.GetMouseButton(0);
+    }
+
+    void Jump()
+    {
+        Vector2 velocity = new Vector2(0, JumpInitialVelocity);
+        rb.velocity = velocity;
     }
 
     private void FixedUpdate()
@@ -66,7 +73,18 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = c;
         Gizmos.DrawWireCube( boxCollider.bounds.center + Vector3.down * 0.1f, boxCollider.bounds.size);
     }
+    private void OnValidate()
+    {
+        DefineGravity();
+    }
+    void DefineGravity()
+    {
+        float g = (-2 * jumpHeight) / Mathf.Pow(jumpPeakDuration, 2);
+        Vector2 gravity = new Vector2( 0, g);
+        Physics2D.gravity = gravity;
+    }
 
+    //Move to Player Effects Controller
     bool paralyzed;
     public void Kors()
     {
