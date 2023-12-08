@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     bool doubleJumped; // Player already jumped twice
     bool jumpHeld; // Used to know if player holds jump button
 
+    public GameObject tomoes;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,7 +36,7 @@ public class PlayerController : MonoBehaviour
                 Vector2 velocity = new Vector2(0, jumpForce);
                 rb.velocity = velocity;
             }
-            else if (!doubleJumped)
+            else if (!doubleJumped && !paralyzed)
             {
                 doubleJumped = true;
                 Vector2 velocity = new Vector2(0, jumpForce);
@@ -63,5 +65,18 @@ public class PlayerController : MonoBehaviour
         Color c = grounded ? Color.green : Color.red;
         Gizmos.color = c;
         Gizmos.DrawWireCube( boxCollider.bounds.center + Vector3.down * 0.1f, boxCollider.bounds.size);
+    }
+
+    bool paralyzed;
+    public void Kors()
+    {
+        tomoes.SetActive(true);
+        Invoke(nameof(DisableTomoes), 5);
+        paralyzed = true;
+    }
+    void DisableTomoes()
+    {
+        paralyzed = false;
+        tomoes.SetActive(false);
     }
 }
