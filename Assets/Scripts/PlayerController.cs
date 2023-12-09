@@ -48,10 +48,12 @@ public class PlayerController : MonoBehaviour
         jumpHeld = Input.GetMouseButton(0);
     }
 
+    public AudioClip jumpAudio;
     void Jump()
     {
         Vector2 velocity = new Vector2(0, JumpInitialVelocity);
         rb.velocity = velocity;
+        SoundManager.Instance.PlaySfx(jumpAudio);
     }
 
     private void FixedUpdate()

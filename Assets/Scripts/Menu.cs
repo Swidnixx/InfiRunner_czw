@@ -25,6 +25,12 @@ public class Menu : MonoBehaviour
         shopPanel.SetActive(false);
     }
 
+    bool muted;
+    public void Mute()
+    {
+        muted = !muted;
+    }
+
     public void Exit()
     {
 #if UNITY_EDITOR

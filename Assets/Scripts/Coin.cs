@@ -13,6 +13,8 @@ public class Coin : MonoBehaviour
     float initialY;
     Transform player;
 
+    public AudioClip pickupAudio;
+
     private void Start()
     {
         initialY = transform.position.y;
@@ -30,6 +32,7 @@ public class Coin : MonoBehaviour
             Destroy(gameObject);
             GameManager.Instance.CoinCollected();
             Instantiate(effect, transform.position, Quaternion.identity);
+            SoundManager.Instance.PlaySfx(pickupAudio);
         }
     }
 

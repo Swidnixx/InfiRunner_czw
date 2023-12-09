@@ -118,3 +118,4 @@ MonoBehaviour:
   atractionSpeed: 10
   floatingSpeed: 1
   floatDistance: 0.5
+  pickupAudio: {fileID: 8300000, guid: 9e0365c02395f024289de6e7fe10d6ce, type: 3}

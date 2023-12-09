@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
 {
     #region Singleton
@@ -13,9 +12,17 @@ public class SoundManager : MonoBehaviour
     }
     #endregion
 
-    AudioSource audioSource;
-    private void Start()
+    public AudioSource musicSource;
+    public AudioSource uiSource;
+    public AudioSource sfxSource;
+
+    public void PlaySfx(AudioClip clip)
     {
-        audioSource = GetComponent<AudioSource>();
+        sfxSource.PlayOneShot(clip);
+    }
+
+    public void PlayUI(AudioClip clip)
+    {
+        uiSource.PlayOneShot(clip);
     }
 }

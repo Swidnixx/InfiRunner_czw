@@ -568,6 +568,7 @@ MonoBehaviour:
   jumpPeakDuration: 0.35
   pushForce: 70
   tomoes: {fileID: 1293668973}
+  jumpAudio: {fileID: 8300000, guid: d88badeaa753c5544b99b6bae2ace779, type: 3}
 --- !u!95 &95228487
 Animator:
   serializedVersion: 4
