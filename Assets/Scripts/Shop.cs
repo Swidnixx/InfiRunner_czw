@@ -40,10 +40,14 @@ public class Shop : MonoBehaviour
         magnetInfoText.text = info;
     }
 
+    public AudioClip upgradeSuccess;
+    public AudioClip upgradeFail;
     public void UpgradeMagnet()
     {
         if (coins >= powerupManager.Magnet.upgradeCost)
         {
+            SoundManager.Instance.PlayUI(upgradeSuccess);
+
             coins -= powerupManager.Magnet.upgradeCost;
             PlayerPrefs.SetInt("Coins", coins);
             coinsText.text = coins.ToString();
@@ -52,6 +56,7 @@ public class Shop : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.PlayUI(upgradeFail);
             Debug.Log("Not enough money");
         }
     }
@@ -78,6 +83,8 @@ public class Shop : MonoBehaviour
     {
         if (coins >= powerupManager.Immortality.upgradeCost)
         {
+            SoundManager.Instance.PlayUI(upgradeSuccess);
+
             coins -= powerupManager.Immortality.upgradeCost;
             PlayerPrefs.SetInt("Coins", coins);
             coinsText.text = coins.ToString();
@@ -86,6 +93,7 @@ public class Shop : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.PlayUI(upgradeFail);
             Debug.Log("Not enough money");
         }
     }

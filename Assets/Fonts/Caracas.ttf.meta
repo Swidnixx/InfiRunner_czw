@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5be61e85c86a7144ebbfdf7093c4a1e5
+guid: 7eda763a6bd4d634fa8d4508cf7712d7
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - KenVector Future
+  - Caracas
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

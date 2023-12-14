@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,14 +25,27 @@ public class PlayerController : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
+    bool previouslyGrounded;
+    public AudioClip landSound;
     private void Update()
     {
         //Detecting Ground
         RaycastHit2D hit = Physics2D.BoxCast( boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundMask);
         grounded = hit.collider != null && rb.velocity.y <= 0;
+        if(grounded && !previouslyGrounded)
+        {
+            SoundManager.Instance.PlaySfx(landSound);
+        }
+        previouslyGrounded = grounded;
 
         //Jumping
-        if(Input.GetMouseButtonDown(0))
+        bool overUI;
+#if UNITY_EDITOR
+        overUI = EventSystem.current.IsPointerOverGameObject();
+#else
+		overUI = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+#endif
+        if (Input.GetMouseButtonDown(0) && !overUI)
         {
             if(grounded)
             {
@@ -90,8 +104,13 @@ public class PlayerController : MonoBehaviour
     bool paralyzed;
     public void Kors()
     {
+        if(paralyzed)
+        {
+            DisableTomoes();
+            CancelInvoke(nameof(DisableTomoes));
+        }
         tomoes.SetActive(true);
-        Invoke(nameof(DisableTomoes), 5);
+        Invoke(nameof(DisableTomoes), 3);
         paralyzed = true;
     }
     void DisableTomoes()

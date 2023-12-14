@@ -5,6 +5,7 @@ using UnityEngine;
 public class Korsarze : MonoBehaviour
 {
     public ParticleSystem effect;
+    public AudioClip sfx;
     Animator animator;
 
     private void Start()
@@ -19,6 +20,7 @@ public class Korsarze : MonoBehaviour
             animator.SetTrigger("trigger");
             Instantiate(effect, transform.position, Quaternion.identity, transform.parent);
             collision.GetComponent<PlayerController>().Kors();
+            SoundManager.Instance.PlaySfx(sfx);
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ImmortalityBehaviour : MonoBehaviour
 {
     public ParticleSystem effect;
+    public AudioClip audioEffect;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,6 +14,7 @@ public class ImmortalityBehaviour : MonoBehaviour
             Destroy(gameObject);
             GameManager.Instance.ImmortalityCollected();
             Instantiate(effect, transform.position, Quaternion.identity);
+            SoundManager.Instance.PlaySfx(audioEffect);
         }
     }
 }

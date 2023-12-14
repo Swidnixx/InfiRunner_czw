@@ -1,20 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
     #region Singleton
-    public static SoundManager Instance;
+    public static SoundManager Instance
+    {
+        set => _instance = value;
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new GameObject("_SoundManager").AddComponent<SoundManager>();
+                _instance.sfxSource = _instance.gameObject.AddComponent<AudioSource>();
+            }
+            return _instance;
+        }
+    }
+    private static SoundManager _instance;
     private void Awake()
     {
-        Instance = this;
+        if (_instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     #endregion
 
     public AudioSource musicSource;
     public AudioSource uiSource;
     public AudioSource sfxSource;
+
+    public AudioMixer mixer;
+
+    int currentMusic;
+    public AudioClip[] musics;
+
+    private void Start()
+    {
+        RandomMusic();
+    }
+
+    private void Update()
+    {
+        if( musicSource.time > musicSource.clip.length - 0.05f)
+        {
+            NextMusic();
+        }
+    }
+
+    public void SetMusicVolume(float vol01)
+    {
+        float volDb = (1-vol01) * -40;
+        mixer.SetFloat("musicVolume", volDb);
+    }
+
+    public void SetSfxVolume(float vol01)
+    {
+        float volDb = (1 - vol01) * -40;
+        mixer.SetFloat("sfxVolume", volDb);
+    }
 
     public void PlaySfx(AudioClip clip)
     {
@@ -24,5 +75,41 @@ public class SoundManager : MonoBehaviour
     public void PlayUI(AudioClip clip)
     {
         uiSource.PlayOneShot(clip);
+    }
+
+    public void MuteMaster(bool muted)
+    {
+        if(muted)
+            mixer.SetFloat("masterVolume", -80);
+        else
+            mixer.SetFloat("masterVolume", 0);
+
+        //musicSource.mute = muted;
+        //sfxSource.mute = muted;
+        //uiSource.mute = muted;
+    }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
+    }
+
+    public void RestartMusic()
+    {
+        RandomMusic();
+    }
+
+    private void RandomMusic()
+    {
+        currentMusic = Random.Range(0, musics.Length);
+        musicSource.clip = musics[currentMusic];
+        musicSource.Play();
+    }
+    private void NextMusic()
+    {
+        currentMusic++;
+        currentMusic = currentMusic % musics.Length;
+        musicSource.clip = musics[currentMusic];
+        musicSource.Play();
     }
 }

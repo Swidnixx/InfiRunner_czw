@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 8771972552311404798, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
+  audioEffect: {fileID: 8300000, guid: 4c42a2537d3834745bdc751da472e4cd, type: 3}
 --- !u!1001 &6059600262706354832
 PrefabInstance:
   m_ObjectHideFlags: 0

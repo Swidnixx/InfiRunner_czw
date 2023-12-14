@@ -32,11 +32,17 @@ public class GameManager : MonoBehaviour
     public bool ImmortalityActive { get => immortality.IsActive; set => immortality.IsActive = value; }
    
     public PowerupPanelUI powerupsUI;
-
     public EffectsController effectsController;
+
+    public AudioClip gameOverSfx;
+    public AudioClip restartSfx;
+
+    bool highScoreReached;
+    public Action OnHighScoreReached;
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
         //PlayerPrefs.DeleteKey("HighScore");
 
         immortality.IsActive = false;
@@ -49,8 +55,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    bool highScoreReached;
-    public Action OnHighScoreReached;
     private void Update()
     {
         score += worldSpeed * Time.deltaTime;
@@ -75,10 +79,15 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 0;
         gameOverPanel.SetActive(true); //do w³¹czania/wy³¹czania gameObjectó
+
+        SoundManager.Instance.StopMusic();
+        SoundManager.Instance.PlaySfx(gameOverSfx);
     }
 
     public void Restart()
     {
+        SoundManager.Instance.PlayUI(restartSfx);
+        SoundManager.Instance.RestartMusic();
         Time.timeScale = 1;
         SceneManager.LoadScene( SceneManager.GetActiveScene().name );
     }
