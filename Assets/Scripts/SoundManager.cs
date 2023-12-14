@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     #endregion
 
@@ -17,5 +18,28 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+    }
+
+    bool muted;
+    public void ToggleMuted()
+    {
+        muted = !muted;
+        audioSource.mute = muted;
+    }
+
+    public AudioClip jumpSfx;
+    public void PlayJumpSfx()
+    {
+        audioSource.PlayOneShot(jumpSfx);
+    }
+
+    public AudioClip buttonClick, coinCollect;
+    public void PlayButtonClick()
+    {
+        audioSource.PlayOneShot(buttonClick);
+    }
+    public void PlayCoinCollect()
+    {
+        audioSource.PlayOneShot(coinCollect);
     }
 }

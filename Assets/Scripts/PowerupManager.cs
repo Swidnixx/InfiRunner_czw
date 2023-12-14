@@ -21,18 +21,42 @@ public class PowerupManager : ScriptableObject
     public MagnetSO Magnet
     {
         get { return magnet; }
-        set { magnet = value; }
+        set 
+        { 
+            magnet = value;
+            PlayerPrefs.SetString("MagnetLevel", magnet.name);
+            Debug.Log(magnet.name + " was saved");
+        }
     }
 
     public void Init()
     {
+        //Immortality
         ImmortalitySO tmp =
             Resources.Load<ImmortalitySO>(PlayerPrefs.GetString("ImmortalityLevel"));
 
         if(tmp != null)
         {
             immortality = tmp;
-            Debug.Log("Immortality " + tmp.name + " was loaded");
+            Debug.Log("Immortality: " + tmp.name + " was loaded");
+        }
+        else
+        {
+            Debug.Log("Default immortality: " + immortality.name);
+        }
+
+        //Magnet
+        MagnetSO tmp2 =
+            Resources.Load<MagnetSO>(PlayerPrefs.GetString("MagnetLevel"));
+
+        if (tmp2 != null)
+        {
+            magnet = tmp2;
+            Debug.Log("Magnet: " + tmp2.name + " was loaded");
+        }
+        else
+        {
+            Debug.Log("Default magnet: " + magnet.name);
         }
     }
 }

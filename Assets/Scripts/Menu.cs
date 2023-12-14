@@ -6,6 +6,17 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
     public GameObject menuPanel, shopPanel;
+    public PowerupManager powerupManager;
+
+    private void Awake()
+    {
+        powerupManager.Init();
+    }
+
+    private void Start()
+    {
+        BackToMenu();
+    }
 
     public void Play()
     {

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PowerupManager
   m_EditorClassIdentifier: 
   immortality: {fileID: 11400000, guid: 259b53bbe3b350246a623816e0779f07, type: 2}
-  magnet: {fileID: 11400000, guid: 479b1554864369645a4bcbdc8cba7239, type: 2}
+  magnet: {fileID: 11400000, guid: f190ac416f150d44bbe5e5306e22f5c2, type: 2}

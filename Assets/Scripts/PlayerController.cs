@@ -31,18 +31,23 @@ public class PlayerController : MonoBehaviour
             if(grounded)
             {
                 doubleJumped = false;
-                Vector2 velocity = new Vector2(0, jumpForce);
-                rb.velocity = velocity;
+                Jump();
             }
             else if (!doubleJumped)
             {
                 doubleJumped = true;
-                Vector2 velocity = new Vector2(0, jumpForce);
-                rb.velocity = velocity;
+                Jump();
             }
         }
 
         jumpHeld = Input.GetMouseButton(0);
+    }
+
+    void Jump()
+    {
+        Vector2 velocity = new Vector2(0, jumpForce);
+        rb.velocity = velocity;
+        SoundManager.Instance.PlayJumpSfx();
     }
 
     private void FixedUpdate()
