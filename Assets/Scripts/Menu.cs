@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
     public GameObject menuPanel;
     public GameObject shopPanel;
+    public Text muteText;
+    public Text coinsText;
+    public Text highScoreText;
+
+    public Slider musicSlider;
+    public Slider sfxSlider;
 
     public AudioClip buttonClick;
 
@@ -14,7 +21,19 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
+
         animator = GetComponent<Animator>();
+
+        float highScore = PlayerPrefs.GetFloat("HighScore");
+        highScoreText.text = highScore.ToString("f0");
+
+        muteText.text = SoundManager.Instance.Muted ? "unmute" : "mute";
+
+        musicSlider.value = SoundManager.Instance.MusicVolume;
+        sfxSlider.value = SoundManager.Instance.SfxVolume;
+        musicSlider.onValueChanged.AddListener(SoundManager.Instance.SetMusicVolume);
+        sfxSlider.onValueChanged.AddListener(SoundManager.Instance.SetSfxVolume);
     }
 
     public void Play()
@@ -28,8 +47,6 @@ public class Menu : MonoBehaviour
     {
         SoundManager.Instance.PlayUI(buttonClick);
 
-        //menuPanel.SetActive(false);
-        //shopPanel.SetActive(true);
         animator.SetBool("shop", true);
     }
 
@@ -37,8 +54,6 @@ public class Menu : MonoBehaviour
     {
         SoundManager.Instance.PlayUI(buttonClick);
 
-        //menuPanel.SetActive(true);
-        //shopPanel.SetActive(false);
         animator.SetBool("shop", false);
     }
 
@@ -48,6 +63,7 @@ public class Menu : MonoBehaviour
         muted = !muted;
         SoundManager.Instance.MuteMaster(muted);
         SoundManager.Instance.PlayUI(buttonClick);
+        muteText.text = muted ? "unmute" : "mute";
     }
 
     public void Exit()

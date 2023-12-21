@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
             return _instance;
         }
     }
+
     private static SoundManager _instance;
     private void Awake()
     {
@@ -42,6 +43,12 @@ public class SoundManager : MonoBehaviour
     int currentMusic;
     public AudioClip[] musics;
 
+    public bool Muted => muted;
+    bool muted;
+
+    public float MusicVolume { get; private set; } = 1;
+    public float SfxVolume { get; private set; } = 1;
+
     private void Start()
     {
         RandomMusic();
@@ -59,12 +66,14 @@ public class SoundManager : MonoBehaviour
     {
         float volDb = (1-vol01) * -40;
         mixer.SetFloat("musicVolume", volDb);
+        MusicVolume = vol01;
     }
 
     public void SetSfxVolume(float vol01)
     {
         float volDb = (1 - vol01) * -40;
         mixer.SetFloat("sfxVolume", volDb);
+        SfxVolume = vol01;
     }
 
     public void PlaySfx(AudioClip clip)
@@ -79,6 +88,8 @@ public class SoundManager : MonoBehaviour
 
     public void MuteMaster(bool muted)
     {
+        this.muted = muted;
+
         if(muted)
             mixer.SetFloat("masterVolume", -80);
         else

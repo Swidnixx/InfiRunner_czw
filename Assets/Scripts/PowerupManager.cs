@@ -30,18 +30,18 @@ public class PowerupManager : ScriptableObject
         }
     }
 
-    private void Awake()
+    public void Init()
     {
         //Read current powerup level from PlayerPrefs on startup
         // Stay at default if not found
-        ImmortalitySO tmp = Resources.Load<ImmortalitySO>("Config/" + PlayerPrefs.GetString("BatteryLevel"));
+        ImmortalitySO tmp = Resources.Load<ImmortalitySO>(PlayerPrefs.GetString("BatteryLevel"));
         if (tmp != null)
         {
             _battery = tmp;
             Debug.Log("ImmortalitySO: " + tmp.name + " has been loaded!");
         }
 
-        MagnetSO tmp2 = Resources.Load<MagnetSO>("Config/" + PlayerPrefs.GetString("MagnetLevel"));
+        MagnetSO tmp2 = Resources.Load<MagnetSO>(PlayerPrefs.GetString("MagnetLevel"));
         if (tmp2 != null)
         {
             _magnet = tmp2;

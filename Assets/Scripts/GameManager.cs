@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 60;
         //PlayerPrefs.DeleteKey("HighScore");
 
+        gameOverPanel.SetActive(false);
+
         immortality.IsActive = false;
         magnet.IsActive = false;
 
@@ -78,7 +80,7 @@ public class GameManager : MonoBehaviour
         if (immortality.IsActive) return;
 
         Time.timeScale = 0;
-        gameOverPanel.SetActive(true); //do w³¹czania/wy³¹czania gameObjectó
+        gameOverPanel.SetActive(true);
 
         SoundManager.Instance.StopMusic();
         SoundManager.Instance.PlaySfx(gameOverSfx);

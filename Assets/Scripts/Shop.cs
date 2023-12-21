@@ -12,12 +12,19 @@ public class Shop : MonoBehaviour
     public Button magnetButton;
 
     public Text coinsText;
+
+    public AudioClip upgradeSuccess;
+    public AudioClip upgradeFail;
+
     int coins;
 
     private void Start()
     {
+        powerupManager.Init();
+
         coins = PlayerPrefs.GetInt("Coins", 0);
         coinsText.text = coins.ToString();
+
         DisplayBatteryInfo();
         DisplayMagnetInfo();
     }
@@ -40,8 +47,6 @@ public class Shop : MonoBehaviour
         magnetInfoText.text = info;
     }
 
-    public AudioClip upgradeSuccess;
-    public AudioClip upgradeFail;
     public void UpgradeMagnet()
     {
         if (coins >= powerupManager.Magnet.upgradeCost)
