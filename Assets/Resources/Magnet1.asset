@@ -15,5 +15,5 @@ MonoBehaviour:
   duration: 10
   level: 1
   upgraded: {fileID: 11400000, guid: f190ac416f150d44bbe5e5306e22f5c2, type: 2}
-  upgradeCost: 100
+  upgradeCost: 2
   magnetDistance: 4
