@@ -16,27 +16,52 @@ public class PlayerController : MonoBehaviour
     bool jumpHeld; // Used to know if player holds jump button
 
     public GameObject tomoes;
+
+    public AudioClip jumpAudio;
+    public AudioClip landSound;
+
     float JumpInitialVelocity => (2 * jumpHeight) /  jumpPeakDuration;
+
+    Animator animator;
+
+    bool previouslyGrounded;
+
 
     private void Start()
     {
         DefineGravity();
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+
+        GameManager.Instance.GameOverEvent += OnGameOver;
+    }
+    private void OnDestroy()
+    {
+        GameManager.Instance.GameOverEvent -= OnGameOver;
     }
 
-    bool previouslyGrounded;
-    public AudioClip landSound;
+    bool over;
+    void OnGameOver()
+    {
+        over = true;
+        animator.SetTrigger("gameOver");
+    }
+
     private void Update()
     {
+        if (over) return;
+
         //Detecting Ground
         RaycastHit2D hit = Physics2D.BoxCast( boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundMask);
         grounded = hit.collider != null && rb.velocity.y <= 0;
         if(grounded && !previouslyGrounded)
         {
             SoundManager.Instance.PlaySfx(landSound);
+            animator.SetBool("doubleJumped", doubleJumped);
         }
         previouslyGrounded = grounded;
+        animator.SetBool("grounded", grounded);
 
         //Jumping
         bool overUI;
@@ -62,12 +87,12 @@ public class PlayerController : MonoBehaviour
         jumpHeld = Input.GetMouseButton(0);
     }
 
-    public AudioClip jumpAudio;
     void Jump()
     {
         Vector2 velocity = new Vector2(0, JumpInitialVelocity);
         rb.velocity = velocity;
         SoundManager.Instance.PlaySfx(jumpAudio);
+        animator.SetTrigger("jump");
     }
 
     private void FixedUpdate()

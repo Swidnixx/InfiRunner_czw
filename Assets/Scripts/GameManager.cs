@@ -74,12 +74,15 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
+    bool over;
+    public event Action GameOverEvent;
     internal void GameOver()
     {
-        if (immortality.IsActive) return;
+        if (immortality.IsActive || over) return;
 
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
+        worldSpeed = 0;
+        GameOverEvent?.Invoke();
         gameOverPanel.SetActive(true);
 
         SoundManager.Instance.StopMusic();
